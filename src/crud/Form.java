@@ -9,7 +9,6 @@ import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-//import java.util.Date;
 import java.sql.Date;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -25,7 +24,6 @@ public class Form extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet rs;
 
-    
     /**
      * Creates new form Form
      */
@@ -59,7 +57,7 @@ public class Form extends javax.swing.JFrame {
         botonInsertar = new javax.swing.JButton();
         botonModificar = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
-        botonBorrar = new javax.swing.JButton();
+        botonLimpiar = new javax.swing.JButton();
         campoBuscar = new javax.swing.JTextField();
         botonBuscar = new javax.swing.JButton();
         campoID = new javax.swing.JTextField();
@@ -104,12 +102,38 @@ public class Form extends javax.swing.JFrame {
         });
 
         botonModificar.setText("Modificar");
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
 
         botonEliminar.setText("Eliminar");
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
 
-        botonBorrar.setText("Borrar");
+        botonLimpiar.setText("Limpiar");
+        botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLimpiarActionPerformed(evt);
+            }
+        });
+
+        campoBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoBuscarActionPerformed(evt);
+            }
+        });
 
         botonBuscar.setText("Buscar");
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,7 +149,7 @@ public class Form extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addComponent(botonEliminar)
                         .addGap(42, 42, 42)
-                        .addComponent(botonBorrar))
+                        .addComponent(botonLimpiar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +218,7 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(botonInsertar)
                     .addComponent(botonModificar)
                     .addComponent(botonEliminar)
-                    .addComponent(botonBorrar))
+                    .addComponent(botonLimpiar))
                 .addContainerGap())
         );
 
@@ -210,7 +234,6 @@ public class Form extends javax.swing.JFrame {
     }//GEN-LAST:event_campoGeneroActionPerformed
 
     private void botonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsertarActionPerformed
-        // TODO add your handling code here:        
         Connection conexion = null;
         try{
             conexion = getConnection();
@@ -225,14 +248,115 @@ public class Form extends javax.swing.JFrame {
             int resultado = ps.executeUpdate();
             if(resultado > 0){
                 JOptionPane.showMessageDialog(null, "Registro Insertado Correctamente.");
+                limpiarCampos();
             }else{
                 JOptionPane.showMessageDialog(null, "Error al Insertar el registro.");
+                limpiarCampos();
             }
             conexion.close();
         }catch(HeadlessException | SQLException ex){
             System.out.println("Error " + ex);
         }
     }//GEN-LAST:event_botonInsertarActionPerformed
+
+    public void limpiarCampos(){
+        campoBuscar.setText(null);
+        campoCelular.setText(null);
+        campoClave.setText(null);
+        campoDomicilio.setText(null);
+        campoEmail.setText(null);
+        campoFechaNacimiento.setText(null);
+        campoGenero.setSelectedIndex(0);
+        campoNombre.setText(null);
+    }
+    
+    private void campoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscarActionPerformed
+   
+    }//GEN-LAST:event_campoBuscarActionPerformed
+
+    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_botonLimpiarActionPerformed
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+        Connection conexion = null;
+        
+        try{
+            conexion = getConnection();
+            ps = (PreparedStatement) conexion.prepareStatement("select * from escuela where clave=?");
+            ps.setString(1, campoBuscar.getText());
+            // executeQuery lo ocupas cuando necesites traer algo de la BD
+            rs = ps.executeQuery();
+            
+            rs = ps.executeQuery();
+            // rs.next() retorna true siempre y cuando haya registros en la BD
+            limpiarCampos();
+            if(rs.next()){
+                campoID.setText(String.valueOf(rs.getInt("idPersona")));
+                campoClave.setText(rs.getString("clave"));
+                campoNombre.setText(rs.getString("nombre"));
+                campoDomicilio.setText(rs.getString("domicilio"));
+                campoCelular.setText(rs.getString("celular"));
+                campoEmail.setText(rs.getString("correo_electronico"));
+                campoFechaNacimiento.setText(rs.getString("fecha_nacimiento"));
+                campoGenero.setSelectedItem(rs.getString("genero"));
+            }else{
+                JOptionPane.showMessageDialog(null, "Registro no encontrado...");
+                limpiarCampos();
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al conectar a la base de datos: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_botonBuscarActionPerformed
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+        Connection conexion = null;
+        try{
+            conexion = getConnection();
+            
+            ps = (PreparedStatement) conexion.prepareStatement("update escuela set clave = ?, nombre = ?, domicilio = ?, correo_electronico = ?, celular = ?, fecha_nacimiento = ?, genero = ? where idPersona = ?");
+            ps.setInt(8, Integer.parseInt(campoID.getText()));
+            ps.setString(1, campoClave.getText());
+            ps.setString(2, campoNombre.getText());
+            ps.setString(3, campoDomicilio.getText());
+            ps.setString(4, campoEmail.getText());
+            ps.setString(5, campoCelular.getText());
+            ps.setDate(6, Date.valueOf(campoFechaNacimiento.getText()));
+            ps.setString(7, campoGenero.getSelectedItem().toString());
+            int resultado = ps.executeUpdate();
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Registro Modificado Correctamente.");
+                limpiarCampos();
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al Modificar registro.");
+                limpiarCampos();
+            }
+            conexion.close();
+        }catch(HeadlessException | SQLException ex){
+            System.out.println("Error " + ex);
+        }
+    }//GEN-LAST:event_botonModificarActionPerformed
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+        Connection conexion = null;
+        try{
+            conexion = getConnection();
+            
+            ps = (PreparedStatement) conexion.prepareStatement("delete from escuela where idPersona = ?");
+            ps.setInt(1, Integer.parseInt(campoID.getText()));
+            int resultado = ps.executeUpdate();
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Registro Eliminado Correctamente.");
+                limpiarCampos();
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al Eliminar registro.");
+                limpiarCampos();
+            }
+            conexion.close();
+        }catch(HeadlessException | SQLException ex){
+            System.out.println("Error " + ex);
+        }
+    }//GEN-LAST:event_botonEliminarActionPerformed
     
     public Connection getConnection() {
         Connection connection = null;
@@ -286,10 +410,10 @@ public class Form extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonBorrar;
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonEliminar;
     private javax.swing.JButton botonInsertar;
+    private javax.swing.JButton botonLimpiar;
     private javax.swing.JButton botonModificar;
     private javax.swing.JTextField campoBuscar;
     private javax.swing.JTextField campoCelular;
