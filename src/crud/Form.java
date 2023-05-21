@@ -4,8 +4,8 @@
  */
 package crud;
 
-import com.mysql.jdbc.PreparedStatement;
 import java.awt.HeadlessException;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -18,9 +18,9 @@ import javax.swing.JOptionPane;
  * @author bauti
  */
 public class Form extends javax.swing.JFrame {
-    public static final String URL = "jdbc:mysql://localhost:3306/escuela?autoReconnet=true&useSSL=false";
-    public static final String USUARIO = "root";
-    public static final String CONTRASEÑA = "616263646566676869";
+    public static final String url = "jdbc:mysql://localhost:3306/escuela";
+    public static final String usuario = "root";
+    public static final String contraseña = "616263646566676869";
     PreparedStatement ps;
     ResultSet rs;
 
@@ -30,7 +30,7 @@ public class Form extends javax.swing.JFrame {
     public Form() {
         initComponents();
         campoID.setVisible(false);
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -40,6 +40,7 @@ public class Form extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         campoClave = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -61,11 +62,25 @@ public class Form extends javax.swing.JFrame {
         campoBuscar = new javax.swing.JTextField();
         botonBuscar = new javax.swing.JButton();
         campoID = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+
+        jButton2.setBackground(new java.awt.Color(204, 0, 0));
+        jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Salir");
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAutoRequestFocus(false);
         setBackground(new java.awt.Color(234, 213, 108));
         setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        setUndecorated(true);
 
         jLabel1.setText("Clave");
 
@@ -135,6 +150,16 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(204, 0, 0));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,39 +168,47 @@ public class Form extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addGap(48, 48, 48))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(campoClave)
+                                    .addComponent(campoNombre)
+                                    .addComponent(campoDomicilio)
+                                    .addComponent(campoCelular)
+                                    .addComponent(campoEmail)
+                                    .addComponent(campoFechaNacimiento)
+                                    .addComponent(campoGenero, 0, 282, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botonBuscar)
+                                .addGap(28, 28, 28)
+                                .addComponent(campoID, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(botonInsertar)
                         .addGap(40, 40, 40)
                         .addComponent(botonModificar)
                         .addGap(38, 38, 38)
                         .addComponent(botonEliminar)
                         .addGap(42, 42, 42)
-                        .addComponent(botonLimpiar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(botonBuscar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(campoID, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7))
-                            .addGap(63, 63, 63)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(campoClave)
-                                .addComponent(campoNombre)
-                                .addComponent(campoDomicilio)
-                                .addComponent(campoCelular)
-                                .addComponent(campoEmail)
-                                .addComponent(campoFechaNacimiento)
-                                .addComponent(campoGenero, 0, 219, Short.MAX_VALUE)))))
-                .addContainerGap(48, Short.MAX_VALUE))
+                        .addComponent(botonLimpiar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,8 +217,9 @@ public class Form extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonBuscar)
-                    .addComponent(campoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(campoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(campoClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,7 +247,7 @@ public class Form extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(campoGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonInsertar)
                     .addComponent(botonModificar)
@@ -235,9 +269,9 @@ public class Form extends javax.swing.JFrame {
 
     private void botonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsertarActionPerformed
         Connection conexion = null;
-        try{
+        try {
             conexion = getConnection();
-            ps = (PreparedStatement) conexion.prepareStatement("insert into escuela(clave, nombre, domicilio, celular, correo_electronico, fecha_nacimiento, genero) values (?,?,?,?,?,?,?)");
+            ps = conexion.prepareStatement("insert into escuela(clave, nombre, domicilio, celular, correo_electronico, fecha_nacimiento, genero) values (?,?,?,?,?,?,?)");
             ps.setString(1, campoClave.getText());
             ps.setString(2, campoNombre.getText());
             ps.setString(3, campoDomicilio.getText());
@@ -246,20 +280,20 @@ public class Form extends javax.swing.JFrame {
             ps.setDate(6, Date.valueOf(campoFechaNacimiento.getText()));
             ps.setString(7, campoGenero.getSelectedItem().toString());
             int resultado = ps.executeUpdate();
-            if(resultado > 0){
+            if (resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Registro Insertado Correctamente.");
                 limpiarCampos();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Error al Insertar el registro.");
                 limpiarCampos();
             }
             conexion.close();
-        }catch(HeadlessException | SQLException ex){
+        } catch (HeadlessException | SQLException ex) {
             System.out.println("Error " + ex);
         }
     }//GEN-LAST:event_botonInsertarActionPerformed
 
-    public void limpiarCampos(){
+    public void limpiarCampos() {
         campoBuscar.setText(null);
         campoCelular.setText(null);
         campoClave.setText(null);
@@ -269,9 +303,9 @@ public class Form extends javax.swing.JFrame {
         campoGenero.setSelectedIndex(0);
         campoNombre.setText(null);
     }
-    
+
     private void campoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscarActionPerformed
-   
+
     }//GEN-LAST:event_campoBuscarActionPerformed
 
     private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
@@ -280,18 +314,17 @@ public class Form extends javax.swing.JFrame {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         Connection conexion = null;
-        
-        try{
+
+        try {
             conexion = getConnection();
-            ps = (PreparedStatement) conexion.prepareStatement("select * from escuela where clave=?");
+            ps = conexion.prepareStatement("select * from escuela where clave = ?");
             ps.setString(1, campoBuscar.getText());
             // executeQuery lo ocupas cuando necesites traer algo de la BD
             rs = ps.executeQuery();
-            
-            rs = ps.executeQuery();
+
             // rs.next() retorna true siempre y cuando haya registros en la BD
             limpiarCampos();
-            if(rs.next()){
+            if (rs.next()) {
                 campoID.setText(String.valueOf(rs.getInt("idPersona")));
                 campoClave.setText(rs.getString("clave"));
                 campoNombre.setText(rs.getString("nombre"));
@@ -300,7 +333,7 @@ public class Form extends javax.swing.JFrame {
                 campoEmail.setText(rs.getString("correo_electronico"));
                 campoFechaNacimiento.setText(rs.getString("fecha_nacimiento"));
                 campoGenero.setSelectedItem(rs.getString("genero"));
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Registro no encontrado...");
                 limpiarCampos();
             }
@@ -311,10 +344,10 @@ public class Form extends javax.swing.JFrame {
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
         Connection conexion = null;
-        try{
+        try {
             conexion = getConnection();
-            
-            ps = (PreparedStatement) conexion.prepareStatement("update escuela set clave = ?, nombre = ?, domicilio = ?, correo_electronico = ?, celular = ?, fecha_nacimiento = ?, genero = ? where idPersona = ?");
+
+            ps = conexion.prepareStatement("update escuela set clave = ?, nombre = ?, domicilio = ?, correo_electronico = ?, celular = ?, fecha_nacimiento = ?, genero = ? where idPersona = ?");
             ps.setInt(8, Integer.parseInt(campoID.getText()));
             ps.setString(1, campoClave.getText());
             ps.setString(2, campoNombre.getText());
@@ -324,56 +357,61 @@ public class Form extends javax.swing.JFrame {
             ps.setDate(6, Date.valueOf(campoFechaNacimiento.getText()));
             ps.setString(7, campoGenero.getSelectedItem().toString());
             int resultado = ps.executeUpdate();
-            if(resultado > 0){
+            if (resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado Correctamente.");
                 limpiarCampos();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Error al Modificar registro.");
                 limpiarCampos();
             }
             conexion.close();
-        }catch(HeadlessException | SQLException ex){
+        } catch (HeadlessException | SQLException ex) {
             System.out.println("Error " + ex);
         }
     }//GEN-LAST:event_botonModificarActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         Connection conexion = null;
-        try{
+        try {
             conexion = getConnection();
-            
-            ps = (PreparedStatement) conexion.prepareStatement("delete from escuela where idPersona = ?");
+
+            ps = conexion.prepareStatement("delete from escuela where idPersona = ?");
             ps.setInt(1, Integer.parseInt(campoID.getText()));
             int resultado = ps.executeUpdate();
-            if(resultado > 0){
+            if (resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Registro Eliminado Correctamente.");
                 limpiarCampos();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Error al Eliminar registro.");
                 limpiarCampos();
             }
             conexion.close();
-        }catch(HeadlessException | SQLException ex){
+        } catch (HeadlessException | SQLException ex) {
             System.out.println("Error " + ex);
         }
     }//GEN-LAST:event_botonEliminarActionPerformed
-    
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public Connection getConnection() {
-        Connection connection = null;
+        Connection conexion = null;
 
         // capturando excepciones
         try {
-            // Cargar el driver de MySQL
-            Class.forName("com.mysql.jdbc.Driver");
-            // Establecer la conexión
-            connection = DriverManager.getConnection(URL, USUARIO, CONTRASEÑA);
-            //JOptionPane.showMessageDialog(null, "Conexion exitosa a la base de datos");
-            // Aquí puedes realizar consultas o ejecutar operaciones en la base de datos
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println("Error al conectar a la base de datos: " + ex.getMessage());
+            conexion = DriverManager.getConnection(url, usuario, contraseña);
+        } catch (SQLException e) {
+            System.out.println("Error al conectar a la base de datos MySQL: " + e.getMessage());
         }
-        return connection;
+        return conexion;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -424,6 +462,8 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> campoGenero;
     private javax.swing.JTextField campoID;
     private javax.swing.JTextField campoNombre;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
