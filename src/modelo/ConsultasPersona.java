@@ -1,17 +1,24 @@
 package modelo;
 
+import controlador.ControladorPersona;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import vista.VistaCrud;
+
 /**
  *
  * @author Daniel
  */
-public class ConsultasPersona extends Conexion{
+public class ConsultasPersona extends Conexion {
+
     PreparedStatement ps;
     ResultSet rs;
 
-    public boolean insertarDatos(Persona persona){
+    public boolean insertarDatos(Persona persona) {
         Connection conexion = null;
         try {
             conexion = getConnection();
@@ -32,7 +39,7 @@ public class ConsultasPersona extends Conexion{
         } catch (Exception e) {
             System.err.println("ERROR: " + e);
             return false;
-        } finally{
+        } finally {
             try {
                 conexion.close();
             } catch (Exception e) {
@@ -40,5 +47,37 @@ public class ConsultasPersona extends Conexion{
             }
         }
     }
-    
+
+    public boolean buscarDatos(Persona persona) {
+        Connection conexion = null;
+        try {
+            conexion = getConnection();
+            ps = conexion.prepareStatement("select * from escuela where clave = ?");
+            ps.setString(1, String.valueOf(persona.getClave()));
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                persona.setIdPersona(rs.getInt("idPersona"));
+                persona.setClave(rs.getInt("clave"));
+                persona.setNombre(rs.getString("nombre"));
+                persona.setDomicilio(rs.getString("domicilio"));
+                persona.setCelular(rs.getString("celular"));
+                persona.setCorreo_electronico(rs.getString("correo_electronico"));
+                persona.setFecha_nacimiento(rs.getDate("fecha_nacimiento"));
+                persona.setGenero(rs.getString("genero"));
+                return true;
+            } else {
+                
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("ERROR: " + e);
+            return false;
+        } finally {
+            try {
+                conexion.close();
+            } catch (Exception e) {
+                System.err.println("ERROR: " + e);
+            }
+        }
+    }
 }
