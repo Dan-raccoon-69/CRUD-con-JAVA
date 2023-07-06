@@ -7,3 +7,8 @@
     + read: consultar datos
     + update: modificar datos
     + delete: eliminar datos
+    
+# Recursos
+* Java version "1.8.0_371"
+* Java(TM) SE Runtime Environment (build 1.8.0_371-b11)
+* Mysql-connector-java-8.0.30.jar 

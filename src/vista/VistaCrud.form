@@ -110,7 +110,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="campoNombre" alignment="3" pref="26" max="32767" attributes="0"/>
+                  <Component id="campoNombre" alignment="3" max="32767" attributes="0"/>
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -154,7 +154,7 @@
     <Component class="javax.swing.JTextField" name="campoEmail">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="1"/>
+          <Font name="Arial" size="15" style="1"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -197,7 +197,7 @@
     <Component class="javax.swing.JTextField" name="campoFechaNacimiento">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="1"/>
+          <Font name="Arial" size="15" style="1"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -211,6 +211,9 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="campoGenero">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="15" style="1"/>
+        </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
             <StringItem index="0" value="Seleccionar"/>
@@ -235,7 +238,7 @@
     <Component class="javax.swing.JTextField" name="campoClave">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="1"/>
+          <Font name="Arial" size="15" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -248,7 +251,7 @@
     <Component class="javax.swing.JTextField" name="campoNombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="1"/>
+          <Font name="Arial" size="15" style="1"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -263,7 +266,7 @@
     <Component class="javax.swing.JTextField" name="campoDomicilio">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="1"/>
+          <Font name="Arial" size="15" style="1"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -278,7 +281,7 @@
     <Component class="javax.swing.JTextField" name="campoCelular">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="1"/>
+          <Font name="Arial" size="15" style="1"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -286,6 +289,11 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="campoBuscar">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="15" style="1"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoBuscarActionPerformed"/>
       </Events>

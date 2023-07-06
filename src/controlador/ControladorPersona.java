@@ -22,9 +22,12 @@ public class ControladorPersona implements ActionListener {
         this.persona = persona;
         this.vista = vista;
         this.consulta = consulta;
+        // DECLARACION DE BOTONES
         vista.botonInsertar.addActionListener(this);
         vista.botonLimpiar.addActionListener(this);
         vista.botonBuscar.addActionListener(this);
+        vista.botonModificar.addActionListener(this);
+        vista.botonEliminar.addActionListener(this);
     }
 
     public void iniciar() {
@@ -46,6 +49,7 @@ public class ControladorPersona implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // ACCION BOTON INSERTAR
         if (e.getSource() == vista.botonInsertar) {
             persona.setClave(Integer.parseInt(vista.campoClave.getText()));
             persona.setNombre(vista.campoNombre.getText());
@@ -54,7 +58,6 @@ public class ControladorPersona implements ActionListener {
             persona.setCorreo_electronico(vista.campoEmail.getText());
             persona.setFecha_nacimiento(Date.valueOf(vista.campoFechaNacimiento.getText()));
             persona.setGenero(vista.campoGenero.getSelectedItem().toString());
-
             Boolean r = consulta.insertarDatos(persona);
             if (r) {
                 JOptionPane.showMessageDialog(null, "Registro ingresado exitosamente");
@@ -63,11 +66,11 @@ public class ControladorPersona implements ActionListener {
                 JOptionPane.showMessageDialog(null, "ERROR al realizar el registro");
             }
         }
-
+        // ACCION BOTON LIMPIAR 
         if (e.getSource() == vista.botonLimpiar) {
             limpiar();
         }
-
+        // ACCION BOTON BUSCAR
         if (e.getSource() == vista.botonBuscar) {
             persona.setClave(Integer.parseInt(vista.campoBuscar.getText()));
             boolean buscar = consulta.buscarDatos(persona);
@@ -80,11 +83,38 @@ public class ControladorPersona implements ActionListener {
                 vista.campoEmail.setText(persona.getCorreo_electronico());
                 vista.campoFechaNacimiento.setText(String.valueOf(persona.getFecha_nacimiento()));
                 vista.campoGenero.setSelectedItem(persona.getGenero());
-
             }
             else{
                 JOptionPane.showMessageDialog(null, "ERROR, no se encontro ningun dato con esa clave.");
                 limpiar();
+            }
+        }
+        // ACCION BOTON MODIFICAR
+        if(e.getSource() == vista.botonModificar){
+            persona.setClave(Integer.parseInt(vista.campoClave.getText()));
+            persona.setNombre(vista.campoNombre.getText());
+            persona.setDomicilio(vista.campoDomicilio.getText());
+            persona.setCelular(vista.campoCelular.getText());
+            persona.setCorreo_electronico(vista.campoEmail.getText());
+            persona.setFecha_nacimiento(Date.valueOf(vista.campoFechaNacimiento.getText()));
+            persona.setGenero(vista.campoGenero.getSelectedItem().toString());
+            
+            if(consulta.modificarDatos(persona)){
+                JOptionPane.showMessageDialog(null, "Registro Modificado Correctamente.");
+                limpiar();
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al Modificar registro.");
+            }
+        }
+        // ACCION BOTON ELIMINAR
+        if(e.getSource() == vista.botonEliminar){
+            persona.setIdPersona(Integer.parseInt(vista.campoID.getText()));
+            
+            if(consulta.eliminarDato(persona)){
+                JOptionPane.showMessageDialog(null, "Registro Eliminado Correctamente.");
+                limpiar();
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al Eliminar registro.");
             }
         }
     }

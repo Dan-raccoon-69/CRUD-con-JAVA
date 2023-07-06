@@ -49,7 +49,7 @@ public class VistaCrud extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        campoEmail.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        campoEmail.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
 
         campoID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,10 +69,11 @@ public class VistaCrud extends javax.swing.JFrame {
             }
         });
 
-        campoFechaNacimiento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        campoFechaNacimiento.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
 
         jLabel7.setText("Genero");
 
+        campoGenero.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         campoGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Masculino", "Femenino" }));
         campoGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,23 +83,24 @@ public class VistaCrud extends javax.swing.JFrame {
 
         jLabel1.setText("Clave");
 
-        campoClave.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        campoClave.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         campoClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoClaveActionPerformed(evt);
             }
         });
 
-        campoNombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        campoNombre.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
 
         jLabel3.setText("Domicilio");
 
-        campoDomicilio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        campoDomicilio.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
 
         jLabel4.setText("Celular");
 
-        campoCelular.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        campoCelular.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
 
+        campoBuscar.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         campoBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoBuscarActionPerformed(evt);
@@ -211,7 +213,7 @@ public class VistaCrud extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(campoNombre)
                     .addComponent(jLabel8))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

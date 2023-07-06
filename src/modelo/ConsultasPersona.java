@@ -1,6 +1,7 @@
 package modelo;
 
 import controlador.ControladorPersona;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -66,7 +67,63 @@ public class ConsultasPersona extends Conexion {
                 persona.setGenero(rs.getString("genero"));
                 return true;
             } else {
-                
+
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("ERROR: " + e);
+            return false;
+        } finally {
+            try {
+                conexion.close();
+            } catch (Exception e) {
+                System.err.println("ERROR: " + e);
+            }
+        }
+    }
+
+    public boolean modificarDatos(Persona persona) {
+        Connection conexion = null;
+        try {
+            conexion = getConnection();
+            ps = conexion.prepareStatement("update escuela set clave = ?, nombre = ?, domicilio = ?, correo_electronico = ?, celular = ?, fecha_nacimiento = ?, genero = ? where idPersona = ?");
+            ps.setString(8, String.valueOf(persona.getIdPersona()));
+
+            ps.setString(1, String.valueOf(persona.getClave()));
+            ps.setString(2, persona.getNombre());
+            ps.setString(3, persona.getDomicilio());
+            ps.setString(4, persona.getCorreo_electronico());
+            ps.setString(5, persona.getCelular());
+            ps.setDate(6, persona.getFecha_nacimiento());
+            ps.setString(7, persona.getGenero());
+            int resultado = ps.executeUpdate();
+            if (resultado > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("ERROR: " + e);
+            return false;
+        } finally {
+            try {
+                conexion.close();
+            } catch (Exception e) {
+                System.err.println("ERROR: " + e);
+            }
+        }
+    }
+    
+    public boolean eliminarDato(Persona persona){
+        Connection conexion = getConnection();
+        try {
+            conexion = getConnection();
+            ps = conexion.prepareStatement("delete from escuela where idPersona = ?");
+            ps.setString(1, String.valueOf(persona.getIdPersona()));
+            int resultado = ps.executeUpdate();
+            if (resultado > 0) {
+                return true;
+            } else {
                 return false;
             }
         } catch (Exception e) {
