@@ -15,10 +15,10 @@ import vista.VistaCrud;
  * @author Daniel
  */
 public class ConsultasPersona extends Conexion {
-
     PreparedStatement ps;
     ResultSet rs;
 
+    // INSERTAR DATOS **********************************
     public boolean insertarDatos(Persona persona) {
         Connection conexion = null;
         try {
@@ -49,6 +49,7 @@ public class ConsultasPersona extends Conexion {
         }
     }
 
+    // BUSCAR DATOS **********************************
     public boolean buscarDatos(Persona persona) {
         Connection conexion = null;
         try {
@@ -82,6 +83,7 @@ public class ConsultasPersona extends Conexion {
         }
     }
 
+    // MODIFICAR DATOS **********************************
     public boolean modificarDatos(Persona persona) {
         Connection conexion = null;
         try {
@@ -114,6 +116,7 @@ public class ConsultasPersona extends Conexion {
         }
     }
     
+    // ELIMINAR DATOS **********************************
     public boolean eliminarDato(Persona persona){
         Connection conexion = getConnection();
         try {

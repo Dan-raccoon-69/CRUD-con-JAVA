@@ -7,7 +7,6 @@ import java.sql.Date;
  * @author Daniel
  */
 public class Persona {
-
     private int idPersona;
     private int clave;
     private String nombre;

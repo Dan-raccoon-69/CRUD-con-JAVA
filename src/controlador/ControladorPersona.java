@@ -13,7 +13,7 @@ import vista.VistaCrud;
  * @author Daniel
  */
 public class ControladorPersona implements ActionListener {
-
+    // Declaracion de componentes
     private Persona persona;
     private VistaCrud vista;
     private ConsultasPersona consulta;
@@ -31,11 +31,13 @@ public class ControladorPersona implements ActionListener {
     }
 
     public void iniciar() {
+        // Configuraciones de la vista
         vista.setTitle("CRUD");
         vista.setLocationRelativeTo(null);
         vista.campoID.setVisible(false);
     }
 
+    // metodo que limpia cada txtField
     public void limpiar() {
         vista.campoBuscar.setText(null);
         vista.campoCelular.setText(null);
@@ -47,10 +49,12 @@ public class ControladorPersona implements ActionListener {
         vista.campoNombre.setText(null);
     }
 
+    // implementando cada accion de cierto boton
     @Override
     public void actionPerformed(ActionEvent e) {
         // ACCION BOTON INSERTAR
         if (e.getSource() == vista.botonInsertar) {
+            // obteniendo datos de la vista para guardarlos en el objeto persona
             persona.setClave(Integer.parseInt(vista.campoClave.getText()));
             persona.setNombre(vista.campoNombre.getText());
             persona.setDomicilio(vista.campoDomicilio.getText());
@@ -58,6 +62,7 @@ public class ControladorPersona implements ActionListener {
             persona.setCorreo_electronico(vista.campoEmail.getText());
             persona.setFecha_nacimiento(Date.valueOf(vista.campoFechaNacimiento.getText()));
             persona.setGenero(vista.campoGenero.getSelectedItem().toString());
+            // insertando datos de la persona
             Boolean r = consulta.insertarDatos(persona);
             if (r) {
                 JOptionPane.showMessageDialog(null, "Registro ingresado exitosamente");
@@ -72,9 +77,13 @@ public class ControladorPersona implements ActionListener {
         }
         // ACCION BOTON BUSCAR
         if (e.getSource() == vista.botonBuscar) {
+            // buscar por clave del usuario
+            // obteniendo clave de usuario desde la vista
             persona.setClave(Integer.parseInt(vista.campoBuscar.getText()));
+            // buscar datos del usuario por clave obtenida
             boolean buscar = consulta.buscarDatos(persona);
             if (buscar) {
+                // rellenando datos de la persona en la vista
                 vista.campoID.setText(String.valueOf(persona.getIdPersona()));
                 vista.campoClave.setText(String.valueOf(persona.getClave()));
                 vista.campoNombre.setText(persona.getNombre());
@@ -91,6 +100,7 @@ public class ControladorPersona implements ActionListener {
         }
         // ACCION BOTON MODIFICAR
         if(e.getSource() == vista.botonModificar){
+            // obteniendo datos del usuario desde la vista
             persona.setClave(Integer.parseInt(vista.campoClave.getText()));
             persona.setNombre(vista.campoNombre.getText());
             persona.setDomicilio(vista.campoDomicilio.getText());
@@ -98,7 +108,7 @@ public class ControladorPersona implements ActionListener {
             persona.setCorreo_electronico(vista.campoEmail.getText());
             persona.setFecha_nacimiento(Date.valueOf(vista.campoFechaNacimiento.getText()));
             persona.setGenero(vista.campoGenero.getSelectedItem().toString());
-            
+            // Modificando datos del usuario
             if(consulta.modificarDatos(persona)){
                 JOptionPane.showMessageDialog(null, "Registro Modificado Correctamente.");
                 limpiar();
@@ -108,8 +118,9 @@ public class ControladorPersona implements ActionListener {
         }
         // ACCION BOTON ELIMINAR
         if(e.getSource() == vista.botonEliminar){
+            // obteniendo id del usuario desde la vista para eliminar dicho usuario
             persona.setIdPersona(Integer.parseInt(vista.campoID.getText()));
-            
+            // eliminando
             if(consulta.eliminarDato(persona)){
                 JOptionPane.showMessageDialog(null, "Registro Eliminado Correctamente.");
                 limpiar();
